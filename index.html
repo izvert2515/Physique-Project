@@ -9,7 +9,10 @@
   <meta name="apple-mobile-web-app-title" content="Physique" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+:root{--bg:#06101c;--card:#0d1a2a;--card2:#101f32;--cyan:#16d2fa;--text:#f5fbff;--muted:#8ea0b4;--line:rgba(255,255,255,.07);--safe:env(safe-area-inset-bottom)}*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:radial-gradient(circle at 80% -10%,rgba(22,210,250,.09),transparent 32%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;min-height:100vh}button,input{font:inherit}main{max-width:620px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(100px + var(--safe))}.view{display:none;animation:fade .18s ease}.view.active{display:block}@keyframes fade{from{opacity:.45;transform:translateY(4px)}}header{margin:8px 2px 20px}.hero{display:flex;justify-content:space-between;align-items:center}.hero h1,header h1{font-size:34px;line-height:1.05;margin:5px 0 7px;letter-spacing:-1.3px}.eyebrow{font-size:12px;color:var(--cyan);font-weight:800;letter-spacing:1.45px;margin:0 0 6px}.muted{color:var(--muted);margin:4px 0;line-height:1.35}.avatar{width:50px;height:50px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--cyan);font-size:25px}.card{background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:24px;padding:18px;margin:0 0 14px;box-shadow:0 16px 40px rgba(0,0,0,.16)}h2{margin:4px 0;font-size:21px;letter-spacing:-.35px}.movement{display:flex;gap:20px;align-items:center}.grow{flex:1}.ring{--pct:0;flex:none;width:126px;height:126px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--cyan) calc(var(--pct)*1%),rgba(255,255,255,.08) 0);position:relative}.ring:before{content:"";position:absolute;inset:9px;border-radius:50%;background:#0c1928}.ring div{position:relative;text-align:center}.ring strong{font-size:22px;display:block}.ring span{font-size:12px;color:var(--muted)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric small{font-size:13px;color:var(--muted);font-weight:500}.bar{height:7px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin:12px 0}.bar i{display:block;height:100%;width:0;background:var(--cyan);border-radius:inherit;transition:.25s}.row{display:flex;justify-content:space-between;align-items:center}.status{font-size:34px;color:var(--cyan)}.tappable{cursor:pointer}.inputRow{display:flex;gap:8px;margin-top:12px}.inputRow.stack{flex-direction:column}.inputRow input,label input{min-width:0;width:100%;background:#07121f;color:var(--text);border:1px solid rgba(255,255,255,.1);padding:12px;border-radius:13px;outline:none}.inputRow input:focus,label input:focus{border-color:var(--cyan)}button{border:0;border-radius:12px;padding:11px 14px;background:var(--cyan);color:#001017;font-weight:800;cursor:pointer}.ghost{background:transparent;color:var(--cyan);padding:4px 0}.primary{background:var(--cyan)}.wide{width:100%;padding:15px}.wide:disabled{opacity:.35}.exercise h2{margin-bottom:2px}.sets{margin-top:12px}.set{display:grid;grid-template-columns:34px 1fr 1fr;gap:8px;align-items:center;margin:8px 0}.check{width:28px;height:28px;border-radius:50%;padding:0;background:transparent;border:2px solid #617183;color:transparent}.check.done{border-color:var(--cyan);background:var(--cyan);color:#001017}.set input{width:100%;background:#07121f;color:#fff;border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:11px}.target{color:var(--cyan);font-size:14px}.big{font-size:38px}label{display:block;color:var(--muted);margin:14px 0}label input{display:block;margin-top:6px}.kv{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.danger{margin-top:14px;background:rgba(255,80,80,.1);color:#ff8585}nav{position:fixed;bottom:0;left:0;right:0;padding:8px 8px calc(8px + var(--safe));display:flex;justify-content:center;background:rgba(5,13,24,.91);backdrop-filter:blur(20px);border-top:1px solid var(--line);z-index:10}nav button{flex:1;max-width:150px;background:transparent;color:#73879a;padding:8px 4px 5px;font-size:11px;font-weight:700}nav button span{display:block;font-size:20px;margin-bottom:3px}nav button.active{color:var(--cyan)}@media(max-width:430px){.movement{gap:14px}.ring{width:112px;height:112px}.movement .inputRow{display:block}.movement .inputRow button{margin-top:7px;width:100%}.grid2{gap:10px}.card{padding:16px}}
+
+</style>
   <title>Physique Project</title>
 </head>
 <body>
@@ -31,6 +34,58 @@
   </main>
   <nav><button class="active" data-nav="today"><span>◉</span>Today</button><button data-nav="workout"><span>▣</span>Workout</button><button data-nav="progress"><span>↗</span>Progress</button><button data-nav="profile"><span>⚙</span>Profile</button></nav>
 </div>
-<script src="app.js"></script>
+<script>
+const KEY='physiqueProject.v1';
+const defaultExercises=[
+ {name:'Barbell Hip Thrust',target:'4 sets • 8–12 reps',sets:4},
+ {name:'Romanian Deadlift',target:'3 sets • 8–10 reps',sets:3},
+ {name:'Bulgarian Split Squat',target:'3 sets • 10/side',sets:3},
+ {name:'Leg Curl',target:'3 sets • 10–15 reps',sets:3},
+ {name:'Cable Crunch',target:'3 sets • 12–15 reps',sets:3},
+ {name:'Hanging Leg Raise',target:'3 sets • 10–15 reps',sets:3}
+].map((e,ei)=>({...e,sets:Array.from({length:e.sets},(_,si)=>({id:`${ei}-${si}`,reps:'',weight:'',done:false}))}));
+function fresh(){return{goals:{steps:20000,calories:2000,water:120},daily:{date:today(),steps:0,calories:0,water:0,workoutComplete:false},exercises:structuredClone(defaultExercises),checkins:[],history:{},streak:0}}
+function today(){return new Date().toISOString().slice(0,10)}
+let state=load();
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));return x?migrate(x):fresh()}catch{return fresh()}}
+function migrate(x){const f=fresh();return{...f,...x,goals:{...f.goals,...x.goals},daily:{...f.daily,...x.daily},history:x.history||{},exercises:x.exercises?.length?x.exercises:f.exercises}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function rollover(){if(state.daily.date!==today()){state.history[state.daily.date]={...state.daily};state.daily={date:today(),steps:0,calories:0,water:0,workoutComplete:false};state.exercises=structuredClone(defaultExercises);save()}}
+rollover();
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+ $('#dateText').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date());
+ $('#stepValue').textContent=state.daily.steps.toLocaleString(); $('#stepGoalText').textContent=`Goal: ${state.goals.steps.toLocaleString()}`; $('#stepRing').style.setProperty('--pct',Math.min(100,state.daily.steps/state.goals.steps*100));
+ $('#calValue').textContent=state.daily.calories; $('#calGoal').textContent=`/ ${state.goals.calories}`; $('#calBar').style.width=`${Math.min(100,state.daily.calories/state.goals.calories*100)}%`;
+ $('#waterValue').textContent=state.daily.water; $('#waterGoal').textContent=`/ ${state.goals.water}`; $('#waterBar').style.width=`${Math.min(100,state.daily.water/state.goals.water*100)}%`;
+ const all=state.exercises.flatMap(e=>e.sets), done=all.filter(s=>s.done).length; $('#setCount').textContent=`${done} of ${all.length}`; $('#workoutStatus').textContent=state.daily.workoutComplete?'✓':'›';
+ $('#completeWorkout').disabled=done!==all.length; $('#completeWorkout').textContent=done===all.length?(state.daily.workoutComplete?'Workout Complete ✓':'Complete Workout'):'Finish All Sets to Complete';
+ $('#exerciseList').innerHTML=state.exercises.map((e,ei)=>`<article class="card exercise"><h2>${esc(e.name)}</h2><p class="target">${esc(e.target)}</p><div class="sets">${e.sets.map((s,si)=>`<div class="set"><button class="check ${s.done?'done':''}" data-check="${ei}:${si}">✓</button><input data-reps="${ei}:${si}" inputmode="numeric" placeholder="Reps" value="${esc(s.reps)}"><input data-weight="${ei}:${si}" inputmode="decimal" placeholder="Weight lb" value="${esc(s.weight)}"></div>`).join('')}</div></article>`).join('');
+ const last=state.checkins.at(-1); $('#weightValue').textContent=last?.weight||'—'; $('#bfValue').textContent=last?.bodyFat||'—'; $('#streakValue').textContent=`${calcStreak()} days`; $('#weekDays').textContent=calcWeek();
+ $('#goalSteps').value=state.goals.steps; $('#goalCalories').value=state.goals.calories; $('#goalWater').value=state.goals.water;
+ bindDynamic();
+}
+function daySuccess(d){return d && (d.workoutComplete || d.steps>=state.goals.steps)}
+function calcStreak(){let count=0,d=new Date();for(let i=0;i<365;i++){const k=d.toISOString().slice(0,10),v=k===today()?state.daily:state.history[k];if(daySuccess(v))count++;else if(i>0||v)break;d.setDate(d.getDate()-1)}state.streak=count;return count}
+function calcWeek(){let c=0,d=new Date();const day=d.getDay();d.setDate(d.getDate()-((day+6)%7));for(let i=0;i<7;i++){const k=d.toISOString().slice(0,10),v=k===today()?state.daily:state.history[k];if(daySuccess(v))c++;d.setDate(d.getDate()+1)}return c}
+function bindDynamic(){
+ $$('[data-check]').forEach(b=>b.onclick=()=>{const [e,s]=b.dataset.check.split(':').map(Number);state.exercises[e].sets[s].done=!state.exercises[e].sets[s].done;save();render()});
+ $$('[data-reps]').forEach(i=>i.onchange=()=>{const [e,s]=i.dataset.reps.split(':').map(Number);state.exercises[e].sets[s].reps=i.value;save()});
+ $$('[data-weight]').forEach(i=>i.onchange=()=>{const [e,s]=i.dataset.weight.split(':').map(Number);state.exercises[e].sets[s].weight=i.value;save()});
+}
+function go(id){$$('.view').forEach(v=>v.classList.toggle('active',v.id===id));$$('nav button').forEach(b=>b.classList.toggle('active',b.dataset.nav===id));window.scrollTo({top:0,behavior:'instant'});render()}
+$$('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav)); $$('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+$('[data-action="saveSteps"]').onclick=()=>{state.daily.steps=Math.max(0,+$('#stepsInput').value||0);$('#stepsInput').value='';save();render()};
+$('[data-action="editCalories"]').onclick=()=>{const v=prompt('Calories consumed today:',state.daily.calories);if(v!==null){state.daily.calories=Math.max(0,+v||0);save();render()}};
+$('[data-action="editWater"]').onclick=()=>{const v=prompt('Water consumed today (oz):',state.daily.water);if(v!==null){state.daily.water=Math.max(0,+v||0);save();render()}};
+$('[data-action="completeWorkout"]').onclick=()=>{const all=state.exercises.flatMap(e=>e.sets);if(all.every(s=>s.done)){state.daily.workoutComplete=true;save();render()}};
+$('[data-action="saveCheckin"]').onclick=()=>{const w=$('#weightInput').value,b=$('#bfInput').value;if(!w&&!b)return;state.checkins.push({date:today(),weight:w||null,bodyFat:b||null});$('#weightInput').value='';$('#bfInput').value='';save();render()};
+$('[data-action="saveGoals"]').onclick=()=>{state.goals.steps=Math.max(1000,+$('#goalSteps').value||20000);state.goals.calories=Math.max(500,+$('#goalCalories').value||2000);state.goals.water=Math.max(8,+$('#goalWater').value||120);save();render();alert('Targets saved.')};
+$('[data-action="resetData"]').onclick=()=>{if(confirm('Reset all Physique Project data on this device?')){state=fresh();save();render()}};
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();
+
+</script>
 </body>
 </html>
