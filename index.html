@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07101b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Physique" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Physique Project</title>
+</head>
+<body>
+<div id="app">
+  <main>
+    <section id="today" class="view active">
+      <header class="hero"><div><p class="eyebrow">PHYSIQUE PROJECT</p><h1>Today's Mission</h1><p id="dateText" class="muted"></p></div><div class="avatar">⌁</div></header>
+      <article class="card movement"><div class="ring" id="stepRing"><div><strong id="stepValue">0</strong><span>steps</span></div></div><div class="grow"><p class="eyebrow">DAILY MOVEMENT</p><h2 id="stepGoalText">Goal: 20,000</h2><p class="muted">Enter your steps from the Health app.</p><div class="inputRow"><input id="stepsInput" type="number" inputmode="numeric" min="0" placeholder="Today's steps"><button data-action="saveSteps">Save</button></div></div></article>
+      <div class="grid2"><article class="card metric"><span>🔥</span><p class="muted">Calories</p><h2><span id="calValue">0</span> <small id="calGoal">/ 2000</small></h2><div class="bar"><i id="calBar"></i></div><button class="ghost" data-action="editCalories">Update</button></article><article class="card metric"><span>💧</span><p class="muted">Water</p><h2><span id="waterValue">0</span> oz <small id="waterGoal">/ 120</small></h2><div class="bar"><i id="waterBar"></i></div><button class="ghost" data-action="editWater">Update</button></article></div>
+      <article class="card tappable" data-go="workout"><p class="eyebrow">TODAY'S WORKOUT</p><div class="row"><div><h2>Lower Body + Abs</h2><p class="muted"><span id="setCount">0</span> sets complete</p></div><div id="workoutStatus" class="status">›</div></div></article>
+      <article class="card"><p class="eyebrow">THIS WEEK</p><h2><span id="weekDays">0</span> / 7 days on plan</h2><p class="muted">Steps and completed workouts feed your weekly adherence.</p></article>
+    </section>
+
+    <section id="workout" class="view"><header><p class="eyebrow">LOWER BODY + ABS</p><h1>Build the physique.</h1><p class="muted">Log reps and weight, then check each set off.</p></header><div id="exerciseList"></div><button id="completeWorkout" class="primary wide" data-action="completeWorkout" disabled>Finish All Sets to Complete</button></section>
+
+    <section id="progress" class="view"><header><h1>Progress</h1></header><div class="grid2"><article class="card"><p class="muted">Weight</p><h2><span id="weightValue">—</span> lb</h2></article><article class="card"><p class="muted">Body Fat</p><h2><span id="bfValue">—</span>%</h2></article></div><article class="card"><p class="eyebrow">CHECK-IN</p><h2>Record today's numbers</h2><div class="inputRow stack"><input id="weightInput" type="number" inputmode="decimal" step="0.1" placeholder="Weight (lb)"><input id="bfInput" type="number" inputmode="decimal" step="0.1" placeholder="Body fat %"><button data-action="saveCheckin">Save Check-in</button></div></article><article class="card"><p class="eyebrow">CURRENT STREAK</p><h2 class="big" id="streakValue">0 days</h2><p class="muted">Daily adherence</p></article></section>
+
+    <section id="profile" class="view"><header><h1>Profile</h1></header><article class="card"><p class="eyebrow">DAILY TARGETS</p><label>Steps<input id="goalSteps" type="number" step="1000"></label><label>Calories<input id="goalCalories" type="number" step="50"></label><label>Water (oz)<input id="goalWater" type="number" step="8"></label><button class="primary wide" data-action="saveGoals">Save Targets</button></article><article class="card"><p class="eyebrow">IPHONE MODE</p><h2>Manual activity tracking</h2><p class="muted">Apple Health syncing is disabled in this PWA build. Everything else is stored locally on this device.</p></article><article class="card"><p class="eyebrow">PHYSIQUE PROJECT</p><div class="kv"><span>Version</span><strong>1.0 PWA</strong></div><div class="kv"><span>Theme</span><strong>Dark / Cyan</strong></div><button class="danger" data-action="resetData">Reset Local Data</button></article></section>
+  </main>
+  <nav><button class="active" data-nav="today"><span>◉</span>Today</button><button data-nav="workout"><span>▣</span>Workout</button><button data-nav="progress"><span>↗</span>Progress</button><button data-nav="profile"><span>⚙</span>Profile</button></nav>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
